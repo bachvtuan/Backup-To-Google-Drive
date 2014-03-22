@@ -1,0 +1,8 @@
+{
+	
+	"service_account":"xxxxxxxx-xxxxx0c9e6eincmu@developer.gserviceaccount.com",
+	"private_key12_path":"configs/74214843aee8aba9f11b7825e0a22ef1f06533b7-privatekey.p12",
+	"backup_folder_id":"0B0XTTQmH9aXreFdxS0txVU5Xb1U",
+	"description" : "Description for backup file",
+	"max_file_in_folder": 5
+}
