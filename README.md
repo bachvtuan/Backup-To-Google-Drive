@@ -39,13 +39,20 @@ You can see "max_file_in_folder" that is the number max file on backup folder, s
 
 
 
-###using :
+###using
 
     python backup.py path/configs/config_file.json /path/backup_file.tar.gz
 
-*To automatic backup, you can put this script in crontab and decide the schedule for it.*
+### Automatic backup
 
-##Example backup mysql database
+*To automatic backup, you can put this script in crontab and decide the schedule for it.*
+Below is example 
+
+    00 01 * * * python /my/backup/repository/path/backup.py path/your/your_config.json /path/your/backup/file >>/var/log/drive.log
+
+Above example to set crontab run daily on 1am:00 to backup file with path = */path/your/backup/file* by using config = *path/your/your_config.json*, you can see the result at file */var/log/drive.log*
+
+###Example backup mysql database
 Below is script to backup mysql database to google drive by using this tool, You can look at backup_mysql.example.sh
 
 	BACKUP_DIR="/your/backup/folder"
