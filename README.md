@@ -86,3 +86,7 @@ Below is script to backup mysql database to google drive by using this tool, You
 	rm -f $FILE_PATH
 	echo "Done"
 
+###Setup cronjob for backup mysql script
+Below is my example 
+
+    00 05 * * * bash /my/backup/repository/backup_mysql.sh
