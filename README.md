@@ -1,6 +1,6 @@
 #Automatic backup your file to Google Drive
 
-Althought I could make the backup file on my server but I don't trust it, sometime my server could be crash or harddisk get problem.
+Althought I could make the backup file on  server but I don't trust it, sometime  server could be crashed or hard disk get problem.
 
 So this tool help you auto backup your file to google drive by using Google Drive API and this's good service to make sure my file is safe, I think.
 
@@ -22,7 +22,7 @@ if you want backup a folder, you must compress it first, also, you can compress 
 
 2. you  create your google drive api first at [Link](https://code.google.com/apis/console/b/0/).
 
-3. You create service account to access this , after create service account, you download the private key to somewhere such as I put at path "configs/74214843aee8aba9f11b7825e0a22ef1f06533b7-privatekey.p12" and copy service account id such as "xxxxx-5kfab22qfu82uub2887gi0c9e6eincmu@developer.gserviceaccount.com"
+3. After google drive project is created, You go to *API & Auth* tab and click on *Credentials*. From here, click on button with label **Create new Client ID** and select *service account* and click on **Create Client ID** button , after created service account, you download the private key to somewhere such as I put at path "configs/74214843aee8aba9f11b7825e0a22ef1f06533b7-privatekey.p12" and copy service account id such as "xxxxx-5kfab22qfu82uub2887gi0c9e6eincmu@developer.gserviceaccount.com"
 4. You come back to your google drive [drive.google.com](https://drive.google.com) and create share folder( you create an empty folder and right click on the folder and share to user xxxxx-5kfab22qfu82uub2887gi0c9e6eincmu@developer.gserviceaccount.com  ) and copy the folder id ( You can look at the url after visit folder and the id is there ) and in my case the backup folder url is https://drive.google.com/#folders/0B0XTTQmH9aXreFdxS0txVU5Xb1U so that the id is 0B0XTTQmH9aXreFdxS0txVU5Xb1U
 
 5.  Create config file( such as config_file.json ) and input into this file with json format such as
@@ -44,4 +44,38 @@ You can see "max_file_in_folder" that is the number max file on backup folder, s
     python backup.py path/configs/config_file.json /path/backup_file.tar.gz
 
 *To automatic backup, you can put this script in crontab and decide the schedule for it.*
-##Done
+
+##Example backup mysql database
+Below is script to backup mysql database to google drive by using this tool, You can look at backup_mysql.example.sh
+
+	BACKUP_DIR="/your/backup/folder"
+	BACKUP_CODE="/backup/code/folder"
+	#Sql file name with year-month-date-hour-minute
+	NAME=`date +%Y%m%d-%H%M`
+	SQLFILE=$NAME'.sql'
+	ZNAME=$NAME'.tar.gz'
+
+	FILE_PATH=$BACKUP_DIR'/'$ZNAME
+
+	DBNAME='your_db_name'
+	DBUSER='mysql_user'
+	DBPASSWORD='mysql_password'
+	echo "Dumping DB name=$DBNAME"
+	#Create backup folder if folder is not existing
+	mkdir -p $BACKUP_DIR
+	cd $BACKUP_DIR
+	#Dump sql file to $SQLFILE
+	mysqldump -u $DBUSER -p $DBNAME --password=$DBPASSWORD --skip-lock-tables --force >$SQLFILE
+	#Zip sql file
+	tar -zcvf $ZNAME $SQLFILE
+	#Remove sql file
+	rm -f $SQLFILE
+	#Cd to backup code folder
+	cd $BACKUP_CODE
+	echo "UPloading to google drive"
+	#UPload backup file to google drive
+	python backup.py configs/dethoima.com.json $FILE_PATH
+	#Remove backup file since file is uploaded to google drive
+	rm -f $FILE_PATH
+	echo "Done"
+

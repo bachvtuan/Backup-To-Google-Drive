@@ -27,6 +27,7 @@ try:
     print "not allow"
     sys.exit()
 
+  print sys.argv
   if len(sys.argv) != 3:
     print "wrong argv python backup.py config_file_path upload_file_path"
     sys.exit()
@@ -57,17 +58,18 @@ try:
   
   config_file = open(config_file_path, 'r')
   config = json.loads(config_file.read())
+
   
   drive_service = helper.createDriveService(config)
   print "Authentication is sucessful"
 
-  file_result = helper.insert_file( drive_service, config, upload_file_title,upload_file_mimetype  )
+  file_result = helper.insert_file( drive_service, config, upload_file_path, upload_file_title,upload_file_mimetype  )
   print "Uploaded new file done"
-  print file_result
+  #print file_result
 
   print "Getting list of children files"
   children_files = helper.files_in_folder( drive_service, config['backup_folder_id'] )
-  print children_files
+  #print children_files
   print len( "This folder have " + str(len(children_files)) )
 
   if len( children_files ) > config['max_file_in_folder']:

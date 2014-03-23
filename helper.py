@@ -24,7 +24,7 @@ def createDriveService(config):
   return build('drive', 'v2', http=http)
 
 
-def insert_file(service, config, upload_file_title, upload_file_mimetype ):
+def insert_file(service, config, upload_file_path, upload_file_title, upload_file_mimetype ):
   """Insert new file.
 
   Args:
@@ -37,7 +37,7 @@ def insert_file(service, config, upload_file_title, upload_file_mimetype ):
     Inserted file metadata if successful, None otherwise.
   """
 
-  media_body = MediaFileUpload(upload_file_title, mimetype=upload_file_mimetype, resumable=True)
+  media_body = MediaFileUpload(upload_file_path, mimetype=upload_file_mimetype, resumable=True)
   body = {
     'title': upload_file_title,
     'description': config['description'],
