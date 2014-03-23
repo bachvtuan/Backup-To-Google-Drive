@@ -6,6 +6,8 @@ So this tool help you auto backup your file to google drive by using Google Driv
 
 it's use if you want make sure your data is backuped daily such as sql data, database, upload folder ,etc.
 
+[Web guide link](http://dethoima.com/tu-dong-backup-du-lieu-len-google-drive/)
+
 ###Note
 
 if you want backup a folder, you must compress it first, also, you can compress file to faster backup time.
