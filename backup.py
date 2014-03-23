@@ -27,6 +27,12 @@ try:
     print "not allow"
     sys.exit()
 
+
+  current_file = os.path.realpath(__file__)
+  current_path = os.path.dirname(current_file)
+  print current_path
+  os.chdir(current_path)
+
   print sys.argv
   if len(sys.argv) != 3:
     print "wrong argv python backup.py config_file_path upload_file_path"
