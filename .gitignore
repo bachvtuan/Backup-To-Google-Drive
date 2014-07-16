@@ -1,2 +1,4 @@
 configs/*
-backup_mysql.sh
+scripts/backup_mysql.sh
+scripts/backup_dethoima.com.sh
+scripts/backup_greenlifewindow.com.sh
