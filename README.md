@@ -92,3 +92,20 @@ Below is script to backup mysql database to google drive by using this tool, You
 Below is my example 
 
     00 05 * * * bash /my/backup/repository/backup_mysql.sh
+
+## Restore
+**syntax**
+
+```
+python restore.py configfile_path restore_path
+```
+
+- The configfile__path is same when you backup.
+- restore_path is the folder is used to store file is downloaded from  google drive.
+
+
+**Example**
+
+```
+python restore.py configs/abc.com.json /var/www
+```
