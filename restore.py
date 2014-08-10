@@ -59,8 +59,6 @@ try:
   print helper.coloured_output("Getting list of children files" , 'yellow')
 
   children_files = helper.files_in_folder( drive_service, config['backup_folder_id'], True )
-  #print children_files
-  print "This folder have " + str(len(children_files))
 
   if len( children_files ) == 0:
     print helper.coloured_output("Not found any file on your backup folder to restoring" , 'red')
