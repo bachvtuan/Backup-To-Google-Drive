@@ -68,16 +68,16 @@ try:
   #   print json.dumps(children_files)
 
 
-  print "I found {} files on your backup folder, the more small number is newer file version: ".format( len(children_files) )
+  print "I found {0} files on your backup folder, the smaller number is newer file version: ".format( len(children_files) )
   index = 1
   for children in children_files:
     
     #Convert unicode to datetime object
     modify_date = datetime.strptime(children['modifiedDate'], '%Y-%m-%dT%H:%M:%S.%fZ')
-    print "version {} on {}".format( str(index), modify_date.strftime('%Y-%m-%d %H:%M:%S %Z') )
+    print "version {0} on {1}".format( str(index), modify_date.strftime('%Y-%m-%d %H:%M:%S %Z') )
     index +=1
 
-  print "What's file do you want to download[ Input number, 1 is newsest, [1, {}] ]".format( str( len(children_files) ) )
+  print "What's file do you want to download[ Input number, 1 is newsest, [1, {0}] ]".format( str( len(children_files) ) )
   file_index = raw_input("Your answer: ")
 
   if file_index is None or file_index.isdigit() is False:
@@ -95,7 +95,7 @@ try:
 
   download_url = select_file["download_url"]
 
-  file_path = os.path.join(restore_path, "{}.{}".format( str(file_index + 1), select_file["title"])) 
+  file_path = os.path.join(restore_path, "{0}.{1}".format( str(file_index + 1), select_file["title"])) 
 
   print helper.coloured_output("Restoring to " + file_path, 'yellow')  
 

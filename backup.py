@@ -76,7 +76,7 @@ try:
   print helper.coloured_output("Getting list of children files" , 'yellow')
   children_files = helper.files_in_folder( drive_service, config['backup_folder_id'] )
   #print children_files
-  print "This folder have {} files".format( str(len(children_files)) )
+  print "This folder have {0} files".format( str(len(children_files)) )
 
   if len( children_files ) > config['max_file_in_folder']:
     #Remove old backup file
