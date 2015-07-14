@@ -60,6 +60,42 @@ def insert_file(service, config, upload_file_path, upload_file_title, upload_fil
     return None
 
 
+def retrieve_all_files(service, folder_id, trashed=False):
+  """Retrieve a list of File resources.
+
+  Args:
+    service: Drive API service instance.
+  Returns:
+    List of File resources.
+  """
+  result = []
+  page_token = None
+  while True:
+    try:
+      #find on folder id and not trashed
+      trashed = "false" if trashed == False else "true"
+      param = {
+        "q": "'%s' in parents and trashed = %s " % (folder_id, trashed)
+      }
+      
+      print "q", param["q"]
+      if page_token:
+        param['pageToken'] = page_token
+
+      print param
+
+      files = service.files().list(**param).execute()
+
+      result.extend(files['items'])
+      page_token = files.get('nextPageToken')
+      if not page_token:
+        break
+    except errors.HttpError, error:
+      print 'An error occurred: %s' % error
+      break
+  return result
+
+
 def files_in_folder(service, folder_id, include_download_url = False):
   """Return files belonging to a folder.
 
@@ -116,19 +152,35 @@ def files_in_folder(service, folder_id, include_download_url = False):
       break
   return return_list
 
-def remove_file_from_folder(service, folder_id, file_id):
-  """Remove a file from a folder.
+def remove_file(service, file_id):
+  """Remove permanently a file from a folder.
 
   Args:
     service: Drive API service instance.
-    folder_id: ID of the folder to remove the file from.
     file_id: ID of the file to remove from the folder.
   """
   try:
-    service.children().delete(folderId=folder_id, childId=file_id).execute()
+    service.files().delete( fileId=file_id).execute()
   except errors.HttpError, error:
     print 'An error occurred: %s' % error
 
+
+
+def print_about(service):
+  """Print information about the user along with the Drive API settings.
+
+  Args:
+    service: Drive API service instance.
+  """
+  try:
+    about = service.about().get().execute()
+
+    print 'Current user name: %s' % about['name']
+    print 'Root folder ID: %s' % about['rootFolderId']
+    print 'Total quota (bytes): %s' % about['quotaBytesTotal']
+    print 'Used quota (bytes): %s' % about['quotaBytesUsed']
+  except errors.HttpError, error:
+    print 'An error occurred: %s' % error
 
 def coloured_output(out, color):
   mapping_color = {

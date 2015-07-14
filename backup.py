@@ -67,14 +67,17 @@ try:
   
   drive_service = helper.createDriveService(config)
   print helper.coloured_output("Authentication is sucessful" , 'green')
+  print helper.print_about( drive_service )
   print helper.coloured_output("Uploading file to your google drive" , 'yellow')
 
   file_result = helper.insert_file( drive_service, config, upload_file_path, upload_file_title,upload_file_mimetype  )
+  
   print helper.coloured_output("Uploaded new file done" , 'green')
   #print file_result
 
   print helper.coloured_output("Getting list of children files" , 'yellow')
-  children_files = helper.files_in_folder( drive_service, config['backup_folder_id'] )
+  children_files = helper.retrieve_all_files( drive_service, config['backup_folder_id'] )
+  # print "children_files", children_files
   #print children_files
   print "This folder have {0} files".format( str(len(children_files)) )
 
@@ -87,7 +90,7 @@ try:
     while count < number_delete_file:
       children_id = children_files[index_delete_file]['id']
       print helper.coloured_output( "Removing old file with id " + children_id , 'yellow')
-      helper.remove_file_from_folder( drive_service, config['backup_folder_id'], children_id )
+      helper.remove_file( drive_service, children_id )
       count +=1
       index_delete_file -=1
 
