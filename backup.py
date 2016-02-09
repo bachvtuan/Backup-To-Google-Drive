@@ -55,8 +55,8 @@ try:
   upload_file_mimetype = mimetype_upload_file[0]
 
   if upload_file_mimetype is None:
-    print "could not get mimetype for upload file"
-    sys.exit()
+    print "could not get mimetype for upload file - using the default"
+    upload_file_mimetype = 'application/octet-stream'
 
   upload_file_title =  os.path.basename(upload_file_path)
   
