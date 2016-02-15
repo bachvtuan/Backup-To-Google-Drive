@@ -40,11 +40,11 @@ try:
   config_file_path = sys.argv[1]
   upload_file_path = sys.argv[2]
 
-  if  os.path.isfile(config_file_path) is False:
+  if os.path.isfile(config_file_path) is False:
     print "not found config file: "+config_file_path
     sys.exit()
 
-  if  os.path.isfile(upload_file_path) is False:
+  if os.path.isfile(upload_file_path) is False:
     print "not found upload file: " + upload_file_path
     sys.exit()
 
@@ -54,9 +54,9 @@ try:
 
   upload_file_mimetype = mimetype_upload_file[0]
 
-  if mimetype_upload_file is None:
-    print "could not get mimetype for upload file"
-    sys.exit()
+  if upload_file_mimetype is None:
+    print "could not get mimetype for upload file - using the default"
+    upload_file_mimetype = 'application/octet-stream'
 
   upload_file_title =  os.path.basename(upload_file_path)
   
