@@ -60,10 +60,8 @@ try:
 
   upload_file_title =  os.path.basename(upload_file_path)
   
-  
-  config_file = open(config_file_path, 'r')
-  config = json.loads(config_file.read())
-
+  with open(config_file_path, 'r') as config_file
+    config = json.loads(config_file.read())
   
   drive_service = helper.createDriveService(config)
   print helper.coloured_output("Authentication is sucessful" , 'green')

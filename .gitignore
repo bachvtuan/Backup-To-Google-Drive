@@ -1,3 +1,4 @@
+*.pyc
 configs/*
 scripts/backup_mysql.sh
 scripts/backup_dethoima.com.sh
