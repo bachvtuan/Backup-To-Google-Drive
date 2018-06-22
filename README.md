@@ -1,4 +1,4 @@
-#Automatic backup your file to Google Drive
+# Automatic backup your file to Google Drive
 
 Althought I could make the backup file on  server but I don't trust it, sometime  server could be crashed or hard disk get problem.
 
@@ -8,11 +8,11 @@ it's use if you want make sure your data is backuped daily such as sql data, dat
 
 [Web guide link](http://dethoima.com/tu-dong-backup-du-lieu-len-google-drive/)
 
-###Note
+### Note
 
 if you want backup a folder, you must compress it first, also, you can compress file to faster backup time.
 
-###Preparing:
+### Preparing:
 
 1. Install goolge api package for python
 
@@ -41,7 +41,7 @@ You can see "max_file_in_folder" that is the number max file on backup folder, s
 
 
 
-###using
+### using
 
     python backup.py path/configs/config_file.json /path/backup_file.tar.gz
 
@@ -54,7 +54,7 @@ Below is example
 
 Above example to set crontab run daily on 1am:00 to backup file with path = */path/your/backup/file* by using config = *path/your/your_config.json*, you can see the result at file */var/log/drive.log*
 
-###Example backup mysql database
+### Example backup mysql database
 Below is script to backup mysql database to google drive by using this tool, You can look at backup_mysql.example.sh
 
 	BACKUP_DIR="/your/backup/folder"
@@ -88,7 +88,7 @@ Below is script to backup mysql database to google drive by using this tool, You
 	rm -f $FILE_PATH
 	echo "Done"
 
-###Setup cronjob for backup mysql script
+### Setup cronjob for backup mysql script
 Below is my example 
 
     00 05 * * * bash /my/backup/repository/backup_mysql.sh
